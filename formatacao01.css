@@ -1,0 +1,12 @@
+body {
+    background-color: #f0f0f0; /* Escolha a cor de fundo desejada */
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+}
