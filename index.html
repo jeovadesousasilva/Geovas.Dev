@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt=br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Projeto 02</title>
+</head>
+<body>
+    <h1>Capitalism Lab Game</h1>
+    <div id="totalinvestido" onmouseenter="mouseEntrouInvestimentos()" onmouseleave="mouseSaiuInvestimentos()">
+        Total investido: R$ <span id="totalinvest">0,00</span><br>
+    </div>
+    <div id="carteira">
+        Carteira: R$ <span id="totalinvest">0,00</span>
+    </div>
+
+    <input type="number" name="valueinvest" placeholder="Valor do Investimento" id="valueinvest">
+    <input type="button" value="Investir" onclick="clickinvest()" id="btninvest" onmouseenter="mouseEntrouInvestir()" onmouseleave="mouseSaiuInvestir()">
+
+    <script>
+        var valorInvestido = 0;
+        var Carteira = 1000;
+        document.getElementById('carteira').innerText = `Carteira: R$ ${Carteira.toFixed(2).replace('.', ',')}`
+        // Função para Investir
+        function invest(){
+            var valorInvestido = document.getElementById('valueinvest')
+        }
+        function clickinvest(){
+            valorInvestido = Number(document.getElementById('valueinvest').value) || 0;
+            if (valorInvestido <= 0 || valorInvestido > Carteira){
+                alert('O valor do investimento é invalido ou você náo possui saldo suficiente!')
+                return
+            }
+            var totalAtual = Number(document.getElementById('totalinvest').innerText.replace('.', '').replace(',', '.')) || 0;
+            var novoTotal = totalAtual + valorInvestido;
+            document.getElementById('totalinvest').innerText = novoTotal.toFixed(2).replace('.', ',');
+            Carteira -= valorInvestido;
+            document.getElementById('carteira').innerText = `Carteira: R$ ${Carteira.toFixed(2).replace('.', ',')}`
+        }
+
+        // Efeitos de mouse em INVESTIMENTOS
+        function mouseEntrouInvestimentos(){
+            document.getElementById('totalinvestido').style.fontSize = '20pt'
+        }
+        function mouseSaiuInvestimentos(){
+            document.getElementById('totalinvestido').style.fontSize = '15pt'
+        }
+
+        // Efeitos de mouse em BOTÃO INVESTIR
+        function mouseEntrouInvestir(){
+            document.getElementById('btninvest').style.fontSize = '20pt'
+        }
+        function mouseSaiuInvestir(){
+            document.getElementById('btninvest').style.fontSize = '15pt'
+        }
+        // Aumenta o valor da carteira a cada 2 segundos
+        setInterval(function() {
+            var aumento = valorInvestido * 0.02; // valor a ser adicionado (2% do valor investido)
+            Carteira += aumento;
+            document.getElementById('carteira').innerText = `Carteira: R$ ${Carteira.toFixed(2).replace('.', ',')}`;
+        }, 2000);
+    </script>
+</body>
+</html>
